@@ -1,11 +1,28 @@
-##To run the script
-the environment variable $PATH_SRC_PYTHON_LOCAL need to be defined and point where you have the dir Process_MNH
 
+## setup 
+- install the python env provided in the yml file
+- the environment variable `$PATH_SRC_PYTHON_LOCAL` need to be defined and point where you have the dir `Process_MNH`
+```
+mamba env create -f environment.yml
+```
+
+## run the script
+```
+source ~/miniforge3/bin/activate process_mnh
 python do_processMNH.py -i PATH_WITH_NC_FILES -t 0 -f nc
-
+```
 for more details on the input
+```
 python do_processMNH.py  --help
+```
 
+if you want to add lambda2 criteria in the output run :
+```
+python do_processMNH.py -i /data/paugam/MNH/IdealCase3/004_ffb-mesonh/ -var lambda2,lambda2
+```
+
+
+## old stuff
 To compile writeplt on kraken
 ```
 module pugre
