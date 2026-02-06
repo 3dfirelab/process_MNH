@@ -1,0 +1,293 @@
+rm -f *.o *.mod *.MOD
+Reading fortran codes...
+	Reading file 'src/cons.f90' (format:free)
+	Reading file 'src/interpolation.f90' (format:free)
+Post-processing...
+	Block: 3dinterp
+			Block: global_var
+			Block: interpolation
+Post-processing (stage 2)...
+	Block: 3dinterp
+		Block: unknown_interface
+			Block: global_var
+			Block: interpolation
+Saving signatures to file "./3dinterp.pyf"
+running build
+running config_cc
+unifing config_cc, config, build_clib, build_ext, build commands --compiler options
+running config_fc
+unifing config_fc, config, build_clib, build_ext, build commands --fcompiler options
+running build_src
+build_src
+building extension "3dinterp" sources
+creating /tmp/tmpr8O7jA/src.linux-x86_64-2.7
+f2py options: []
+f2py: 3dinterp.pyf
+Reading fortran codes...
+	Reading file '3dinterp.pyf' (format:free)
+Post-processing...
+	Block: 3dinterp
+			Block: global_var
+			Block: interpolation
+Post-processing (stage 2)...
+	Block: 3dinterp
+		Block: unknown_interface
+			Block: global_var
+			Block: interpolation
+Building modules...
+	Building module "3dinterp"...
+		Constructing wrapper function "interpolation"...
+		  qq = interpolation(q,xg,yg,zg,x,y,z,[ngx,ngy,ngz,ni,nj,nk,nvar])
+		Constructing F90 module support for "global_var"...
+		  Variables: lu_frp_compa massftmdt lu_rfm xc yc lu_simlpic massfini zc flag_merde piov8 lu_mass phi_pt pict_xe pict_ye timestr2d pict_yb flag_part_glo piov2 pi lu_cv lu_err flag_part_g theta_pt pict_xb flag_firstp lu_open lu_maxmintf lu_frp_f
+getarrdims:warning: assumed shape array, using 0 instead of ':'
+getarrdims:warning: assumed shape array, using 0 instead of ':'
+getarrdims:warning: assumed shape array, using 0 instead of ':'
+	Wrote C/API module "3dinterp" to file "/tmp/tmpr8O7jA/src.linux-x86_64-2.7/3dinterpmodule.c"
+	Fortran 90 wrappers are saved to "/tmp/tmpr8O7jA/src.linux-x86_64-2.7/3dinterp-f2pywrappers2.f90"
+  adding '/tmp/tmpr8O7jA/src.linux-x86_64-2.7/fortranobject.c' to sources.
+  adding '/tmp/tmpr8O7jA/src.linux-x86_64-2.7' to include_dirs.
+copying /usr/lib/python2.7/dist-packages/numpy/f2py/src/fortranobject.c -> /tmp/tmpr8O7jA/src.linux-x86_64-2.7
+copying /usr/lib/python2.7/dist-packages/numpy/f2py/src/fortranobject.h -> /tmp/tmpr8O7jA/src.linux-x86_64-2.7
+  adding '/tmp/tmpr8O7jA/src.linux-x86_64-2.7/3dinterp-f2pywrappers2.f90' to sources.
+build_src: building npy-pkg config files
+running build_ext
+customize UnixCCompiler
+customize UnixCCompiler using build_ext
+customize Gnu95FCompiler
+Found executable /usr/bin/gfortran
+customize Gnu95FCompiler using build_ext
+building '3dinterp' extension
+compiling C sources
+C compiler: x86_64-linux-gnu-gcc -pthread -fno-strict-aliasing -DNDEBUG -g -fwrapv -O2 -Wall -Wstrict-prototypes -fPIC
+
+creating /tmp/tmpr8O7jA/tmp
+creating /tmp/tmpr8O7jA/tmp/tmpr8O7jA
+creating /tmp/tmpr8O7jA/tmp/tmpr8O7jA/src.linux-x86_64-2.7
+compile options: '-I/tmp/tmpr8O7jA/src.linux-x86_64-2.7 -I/usr/lib/python2.7/dist-packages/numpy/core/include -I/usr/include/python2.7 -c'
+x86_64-linux-gnu-gcc: /tmp/tmpr8O7jA/src.linux-x86_64-2.7/fortranobject.c
+In file included from /usr/lib/python2.7/dist-packages/numpy/core/include/numpy/ndarraytypes.h:1761:0,
+                 from /usr/lib/python2.7/dist-packages/numpy/core/include/numpy/ndarrayobject.h:17,
+                 from /usr/lib/python2.7/dist-packages/numpy/core/include/numpy/arrayobject.h:4,
+                 from /tmp/tmpr8O7jA/src.linux-x86_64-2.7/fortranobject.h:13,
+                 from /tmp/tmpr8O7jA/src.linux-x86_64-2.7/fortranobject.c:2:
+/usr/lib/python2.7/dist-packages/numpy/core/include/numpy/npy_1_7_deprecated_api.h:15:2: warning: #warning "Using deprecated NumPy API, disable it by " "#defining NPY_NO_DEPRECATED_API NPY_1_7_API_VERSION" [-Wcpp]
+ #warning "Using deprecated NumPy API, disable it by " \
+  ^
+x86_64-linux-gnu-gcc: /tmp/tmpr8O7jA/src.linux-x86_64-2.7/3dinterpmodule.c
+In file included from /usr/lib/python2.7/dist-packages/numpy/core/include/numpy/ndarraytypes.h:1761:0,
+                 from /usr/lib/python2.7/dist-packages/numpy/core/include/numpy/ndarrayobject.h:17,
+                 from /usr/lib/python2.7/dist-packages/numpy/core/include/numpy/arrayobject.h:4,
+                 from /tmp/tmpr8O7jA/src.linux-x86_64-2.7/fortranobject.h:13,
+                 from /tmp/tmpr8O7jA/src.linux-x86_64-2.7/3dinterpmodule.c:18:
+/usr/lib/python2.7/dist-packages/numpy/core/include/numpy/npy_1_7_deprecated_api.h:15:2: warning: #warning "Using deprecated NumPy API, disable it by " "#defining NPY_NO_DEPRECATED_API NPY_1_7_API_VERSION" [-Wcpp]
+ #warning "Using deprecated NumPy API, disable it by " \
+  ^
+/tmp/tmpr8O7jA/src.linux-x86_64-2.7/3dinterpmodule.c:22:18: error: invalid suffix "dinterp_error" on integer constant
+ static PyObject *3dinterp_error;
+                  ^
+/tmp/tmpr8O7jA/src.linux-x86_64-2.7/3dinterpmodule.c:22:18: error: expected identifier or ‘(’ before numeric constant
+/tmp/tmpr8O7jA/src.linux-x86_64-2.7/3dinterpmodule.c:23:18: error: invalid suffix "dinterp_module" on integer constant
+ static PyObject *3dinterp_module;
+                  ^
+/tmp/tmpr8O7jA/src.linux-x86_64-2.7/3dinterpmodule.c:23:18: error: expected identifier or ‘(’ before numeric constant
+/tmp/tmpr8O7jA/src.linux-x86_64-2.7/3dinterpmodule.c: In function ‘int_from_pyobj’:
+/tmp/tmpr8O7jA/src.linux-x86_64-2.7/3dinterpmodule.c:160:26: error: invalid suffix "dinterp_error" on integer constant
+     if (err==NULL) err = 3dinterp_error;
+                          ^
+/tmp/tmpr8O7jA/src.linux-x86_64-2.7/3dinterpmodule.c: In function ‘f2py_rout_3dinterp_interpolation’:
+/tmp/tmpr8O7jA/src.linux-x86_64-2.7/3dinterpmodule.c:293:23: error: invalid suffix "dinterp_error" on integer constant
+       PyErr_SetString(3dinterp_error,"failed in converting 4th argument `zg' of 3dinterp.interpolation to C/Fortran array" );
+                       ^
+/tmp/tmpr8O7jA/src.linux-x86_64-2.7/3dinterpmodule.c:303:23: error: invalid suffix "dinterp_error" on integer constant
+       PyErr_SetString(3dinterp_error,"failed in converting 2nd argument `xg' of 3dinterp.interpolation to C/Fortran array" );
+                       ^
+/tmp/tmpr8O7jA/src.linux-x86_64-2.7/3dinterpmodule.c:313:23: error: invalid suffix "dinterp_error" on integer constant
+       PyErr_SetString(3dinterp_error,"failed in converting 3rd argument `yg' of 3dinterp.interpolation to C/Fortran array" );
+                       ^
+/tmp/tmpr8O7jA/src.linux-x86_64-2.7/3dinterpmodule.c:323:23: error: invalid suffix "dinterp_error" on integer constant
+       PyErr_SetString(3dinterp_error,"failed in converting 1st argument `q' of 3dinterp.interpolation to C/Fortran array" );
+                       ^
+/tmp/tmpr8O7jA/src.linux-x86_64-2.7/3dinterpmodule.c:83:21: error: invalid suffix "dinterp_error" on integer constant
+     PyErr_SetString(3dinterp_error,errstring);\
+                     ^
+/tmp/tmpr8O7jA/src.linux-x86_64-2.7/3dinterpmodule.c:331:3: note: in expansion of macro ‘CHECKSCALAR’
+   CHECKSCALAR(shape(q,0)==ni,"shape(q,0)==ni","4th keyword ni","interpolation:ni=%d",ni) {
+   ^
+/tmp/tmpr8O7jA/src.linux-x86_64-2.7/3dinterpmodule.c:83:21: error: invalid suffix "dinterp_error" on integer constant
+     PyErr_SetString(3dinterp_error,errstring);\
+                     ^
+/tmp/tmpr8O7jA/src.linux-x86_64-2.7/3dinterpmodule.c:336:3: note: in expansion of macro ‘CHECKSCALAR’
+   CHECKSCALAR(shape(q,1)==nj,"shape(q,1)==nj","5th keyword nj","interpolation:nj=%d",nj) {
+   ^
+/tmp/tmpr8O7jA/src.linux-x86_64-2.7/3dinterpmodule.c:83:21: error: invalid suffix "dinterp_error" on integer constant
+     PyErr_SetString(3dinterp_error,errstring);\
+                     ^
+/tmp/tmpr8O7jA/src.linux-x86_64-2.7/3dinterpmodule.c:341:3: note: in expansion of macro ‘CHECKSCALAR’
+   CHECKSCALAR(shape(q,2)==nk,"shape(q,2)==nk","6th keyword nk","interpolation:nk=%d",nk) {
+   ^
+/tmp/tmpr8O7jA/src.linux-x86_64-2.7/3dinterpmodule.c:83:21: error: invalid suffix "dinterp_error" on integer constant
+     PyErr_SetString(3dinterp_error,errstring);\
+                     ^
+/tmp/tmpr8O7jA/src.linux-x86_64-2.7/3dinterpmodule.c:346:3: note: in expansion of macro ‘CHECKSCALAR’
+   CHECKSCALAR(shape(q,3)==nvar,"shape(q,3)==nvar","7th keyword nvar","interpolation:nvar=%d",nvar) {
+   ^
+/tmp/tmpr8O7jA/src.linux-x86_64-2.7/3dinterpmodule.c:353:23: error: invalid suffix "dinterp_error" on integer constant
+       PyErr_SetString(3dinterp_error,"failed in converting 6th argument `y' of 3dinterp.interpolation to C/Fortran array" );
+                       ^
+/tmp/tmpr8O7jA/src.linux-x86_64-2.7/3dinterpmodule.c:363:23: error: invalid suffix "dinterp_error" on integer constant
+       PyErr_SetString(3dinterp_error,"failed in converting 5th argument `x' of 3dinterp.interpolation to C/Fortran array" );
+                       ^
+/tmp/tmpr8O7jA/src.linux-x86_64-2.7/3dinterpmodule.c:373:23: error: invalid suffix "dinterp_error" on integer constant
+       PyErr_SetString(3dinterp_error,"failed in converting 7th argument `z' of 3dinterp.interpolation to C/Fortran array" );
+                       ^
+/tmp/tmpr8O7jA/src.linux-x86_64-2.7/3dinterpmodule.c:83:21: error: invalid suffix "dinterp_error" on integer constant
+     PyErr_SetString(3dinterp_error,errstring);\
+                     ^
+/tmp/tmpr8O7jA/src.linux-x86_64-2.7/3dinterpmodule.c:381:3: note: in expansion of macro ‘CHECKSCALAR’
+   CHECKSCALAR((len(xg)-1)>=ngx,"(len(xg)-1)>=ngx","1st keyword ngx","interpolation:ngx=%d",ngx) {
+   ^
+/tmp/tmpr8O7jA/src.linux-x86_64-2.7/3dinterpmodule.c:83:21: error: invalid suffix "dinterp_error" on integer constant
+     PyErr_SetString(3dinterp_error,errstring);\
+                     ^
+/tmp/tmpr8O7jA/src.linux-x86_64-2.7/3dinterpmodule.c:386:3: note: in expansion of macro ‘CHECKSCALAR’
+   CHECKSCALAR((len(yg)-1)>=ngy,"(len(yg)-1)>=ngy","2nd keyword ngy","interpolation:ngy=%d",ngy) {
+   ^
+/tmp/tmpr8O7jA/src.linux-x86_64-2.7/3dinterpmodule.c:83:21: error: invalid suffix "dinterp_error" on integer constant
+     PyErr_SetString(3dinterp_error,errstring);\
+                     ^
+/tmp/tmpr8O7jA/src.linux-x86_64-2.7/3dinterpmodule.c:391:3: note: in expansion of macro ‘CHECKSCALAR’
+   CHECKSCALAR((len(zg)-1)>=ngz,"(len(zg)-1)>=ngz","3rd keyword ngz","interpolation:ngz=%d",ngz) {
+   ^
+/tmp/tmpr8O7jA/src.linux-x86_64-2.7/3dinterpmodule.c:398:23: error: invalid suffix "dinterp_error" on integer constant
+       PyErr_SetString(3dinterp_error,"failed in converting hidden `qq' of 3dinterp.interpolation to C/Fortran array" );
+                       ^
+/tmp/tmpr8O7jA/src.linux-x86_64-2.7/3dinterpmodule.c: In function ‘f2py_setup_global_var’:
+/tmp/tmpr8O7jA/src.linux-x86_64-2.7/3dinterpmodule.c:537:38: warning: assignment from incompatible pointer type [enabled by default]
+   f2py_global_var_def[i_f2py++].func = phi_pt;
+                                      ^
+/tmp/tmpr8O7jA/src.linux-x86_64-2.7/3dinterpmodule.c:547:38: warning: assignment from incompatible pointer type [enabled by default]
+   f2py_global_var_def[i_f2py++].func = flag_part_g;
+                                      ^
+/tmp/tmpr8O7jA/src.linux-x86_64-2.7/3dinterpmodule.c:548:38: warning: assignment from incompatible pointer type [enabled by default]
+   f2py_global_var_def[i_f2py++].func = theta_pt;
+                                      ^
+/tmp/tmpr8O7jA/src.linux-x86_64-2.7/3dinterpmodule.c: In function ‘init3dinterp’:
+/tmp/tmpr8O7jA/src.linux-x86_64-2.7/3dinterpmodule.c:608:7: error: invalid suffix "dinterp_module" on integer constant
+   m = 3dinterp_module = Py_InitModule("3dinterp", f2py_module_methods);
+       ^
+/tmp/tmpr8O7jA/src.linux-x86_64-2.7/3dinterpmodule.c:626:3: error: invalid suffix "dinterp_error" on integer constant
+   3dinterp_error = PyErr_NewException ("3dinterp.error", NULL, NULL);
+   ^
+/tmp/tmpr8O7jA/src.linux-x86_64-2.7/3dinterpmodule.c: At top level:
+/tmp/tmpr8O7jA/src.linux-x86_64-2.7/3dinterpmodule.c:111:12: warning: ‘f2py_size’ defined but not used [-Wunused-function]
+ static int f2py_size(PyArrayObject* var, ...)
+            ^
+In file included from /usr/lib/python2.7/dist-packages/numpy/core/include/numpy/ndarraytypes.h:1761:0,
+                 from /usr/lib/python2.7/dist-packages/numpy/core/include/numpy/ndarrayobject.h:17,
+                 from /usr/lib/python2.7/dist-packages/numpy/core/include/numpy/arrayobject.h:4,
+                 from /tmp/tmpr8O7jA/src.linux-x86_64-2.7/fortranobject.h:13,
+                 from /tmp/tmpr8O7jA/src.linux-x86_64-2.7/3dinterpmodule.c:18:
+/usr/lib/python2.7/dist-packages/numpy/core/include/numpy/npy_1_7_deprecated_api.h:15:2: warning: #warning "Using deprecated NumPy API, disable it by " "#defining NPY_NO_DEPRECATED_API NPY_1_7_API_VERSION" [-Wcpp]
+ #warning "Using deprecated NumPy API, disable it by " \
+  ^
+/tmp/tmpr8O7jA/src.linux-x86_64-2.7/3dinterpmodule.c:22:18: error: invalid suffix "dinterp_error" on integer constant
+ static PyObject *3dinterp_error;
+                  ^
+/tmp/tmpr8O7jA/src.linux-x86_64-2.7/3dinterpmodule.c:22:18: error: expected identifier or ‘(’ before numeric constant
+/tmp/tmpr8O7jA/src.linux-x86_64-2.7/3dinterpmodule.c:23:18: error: invalid suffix "dinterp_module" on integer constant
+ static PyObject *3dinterp_module;
+                  ^
+/tmp/tmpr8O7jA/src.linux-x86_64-2.7/3dinterpmodule.c:23:18: error: expected identifier or ‘(’ before numeric constant
+/tmp/tmpr8O7jA/src.linux-x86_64-2.7/3dinterpmodule.c: In function ‘int_from_pyobj’:
+/tmp/tmpr8O7jA/src.linux-x86_64-2.7/3dinterpmodule.c:160:26: error: invalid suffix "dinterp_error" on integer constant
+     if (err==NULL) err = 3dinterp_error;
+                          ^
+/tmp/tmpr8O7jA/src.linux-x86_64-2.7/3dinterpmodule.c: In function ‘f2py_rout_3dinterp_interpolation’:
+/tmp/tmpr8O7jA/src.linux-x86_64-2.7/3dinterpmodule.c:293:23: error: invalid suffix "dinterp_error" on integer constant
+       PyErr_SetString(3dinterp_error,"failed in converting 4th argument `zg' of 3dinterp.interpolation to C/Fortran array" );
+                       ^
+/tmp/tmpr8O7jA/src.linux-x86_64-2.7/3dinterpmodule.c:303:23: error: invalid suffix "dinterp_error" on integer constant
+       PyErr_SetString(3dinterp_error,"failed in converting 2nd argument `xg' of 3dinterp.interpolation to C/Fortran array" );
+                       ^
+/tmp/tmpr8O7jA/src.linux-x86_64-2.7/3dinterpmodule.c:313:23: error: invalid suffix "dinterp_error" on integer constant
+       PyErr_SetString(3dinterp_error,"failed in converting 3rd argument `yg' of 3dinterp.interpolation to C/Fortran array" );
+                       ^
+/tmp/tmpr8O7jA/src.linux-x86_64-2.7/3dinterpmodule.c:323:23: error: invalid suffix "dinterp_error" on integer constant
+       PyErr_SetString(3dinterp_error,"failed in converting 1st argument `q' of 3dinterp.interpolation to C/Fortran array" );
+                       ^
+/tmp/tmpr8O7jA/src.linux-x86_64-2.7/3dinterpmodule.c:83:21: error: invalid suffix "dinterp_error" on integer constant
+     PyErr_SetString(3dinterp_error,errstring);\
+                     ^
+/tmp/tmpr8O7jA/src.linux-x86_64-2.7/3dinterpmodule.c:331:3: note: in expansion of macro ‘CHECKSCALAR’
+   CHECKSCALAR(shape(q,0)==ni,"shape(q,0)==ni","4th keyword ni","interpolation:ni=%d",ni) {
+   ^
+/tmp/tmpr8O7jA/src.linux-x86_64-2.7/3dinterpmodule.c:83:21: error: invalid suffix "dinterp_error" on integer constant
+     PyErr_SetString(3dinterp_error,errstring);\
+                     ^
+/tmp/tmpr8O7jA/src.linux-x86_64-2.7/3dinterpmodule.c:336:3: note: in expansion of macro ‘CHECKSCALAR’
+   CHECKSCALAR(shape(q,1)==nj,"shape(q,1)==nj","5th keyword nj","interpolation:nj=%d",nj) {
+   ^
+/tmp/tmpr8O7jA/src.linux-x86_64-2.7/3dinterpmodule.c:83:21: error: invalid suffix "dinterp_error" on integer constant
+     PyErr_SetString(3dinterp_error,errstring);\
+                     ^
+/tmp/tmpr8O7jA/src.linux-x86_64-2.7/3dinterpmodule.c:341:3: note: in expansion of macro ‘CHECKSCALAR’
+   CHECKSCALAR(shape(q,2)==nk,"shape(q,2)==nk","6th keyword nk","interpolation:nk=%d",nk) {
+   ^
+/tmp/tmpr8O7jA/src.linux-x86_64-2.7/3dinterpmodule.c:83:21: error: invalid suffix "dinterp_error" on integer constant
+     PyErr_SetString(3dinterp_error,errstring);\
+                     ^
+/tmp/tmpr8O7jA/src.linux-x86_64-2.7/3dinterpmodule.c:346:3: note: in expansion of macro ‘CHECKSCALAR’
+   CHECKSCALAR(shape(q,3)==nvar,"shape(q,3)==nvar","7th keyword nvar","interpolation:nvar=%d",nvar) {
+   ^
+/tmp/tmpr8O7jA/src.linux-x86_64-2.7/3dinterpmodule.c:353:23: error: invalid suffix "dinterp_error" on integer constant
+       PyErr_SetString(3dinterp_error,"failed in converting 6th argument `y' of 3dinterp.interpolation to C/Fortran array" );
+                       ^
+/tmp/tmpr8O7jA/src.linux-x86_64-2.7/3dinterpmodule.c:363:23: error: invalid suffix "dinterp_error" on integer constant
+       PyErr_SetString(3dinterp_error,"failed in converting 5th argument `x' of 3dinterp.interpolation to C/Fortran array" );
+                       ^
+/tmp/tmpr8O7jA/src.linux-x86_64-2.7/3dinterpmodule.c:373:23: error: invalid suffix "dinterp_error" on integer constant
+       PyErr_SetString(3dinterp_error,"failed in converting 7th argument `z' of 3dinterp.interpolation to C/Fortran array" );
+                       ^
+/tmp/tmpr8O7jA/src.linux-x86_64-2.7/3dinterpmodule.c:83:21: error: invalid suffix "dinterp_error" on integer constant
+     PyErr_SetString(3dinterp_error,errstring);\
+                     ^
+/tmp/tmpr8O7jA/src.linux-x86_64-2.7/3dinterpmodule.c:381:3: note: in expansion of macro ‘CHECKSCALAR’
+   CHECKSCALAR((len(xg)-1)>=ngx,"(len(xg)-1)>=ngx","1st keyword ngx","interpolation:ngx=%d",ngx) {
+   ^
+/tmp/tmpr8O7jA/src.linux-x86_64-2.7/3dinterpmodule.c:83:21: error: invalid suffix "dinterp_error" on integer constant
+     PyErr_SetString(3dinterp_error,errstring);\
+                     ^
+/tmp/tmpr8O7jA/src.linux-x86_64-2.7/3dinterpmodule.c:386:3: note: in expansion of macro ‘CHECKSCALAR’
+   CHECKSCALAR((len(yg)-1)>=ngy,"(len(yg)-1)>=ngy","2nd keyword ngy","interpolation:ngy=%d",ngy) {
+   ^
+/tmp/tmpr8O7jA/src.linux-x86_64-2.7/3dinterpmodule.c:83:21: error: invalid suffix "dinterp_error" on integer constant
+     PyErr_SetString(3dinterp_error,errstring);\
+                     ^
+/tmp/tmpr8O7jA/src.linux-x86_64-2.7/3dinterpmodule.c:391:3: note: in expansion of macro ‘CHECKSCALAR’
+   CHECKSCALAR((len(zg)-1)>=ngz,"(len(zg)-1)>=ngz","3rd keyword ngz","interpolation:ngz=%d",ngz) {
+   ^
+/tmp/tmpr8O7jA/src.linux-x86_64-2.7/3dinterpmodule.c:398:23: error: invalid suffix "dinterp_error" on integer constant
+       PyErr_SetString(3dinterp_error,"failed in converting hidden `qq' of 3dinterp.interpolation to C/Fortran array" );
+                       ^
+/tmp/tmpr8O7jA/src.linux-x86_64-2.7/3dinterpmodule.c: In function ‘f2py_setup_global_var’:
+/tmp/tmpr8O7jA/src.linux-x86_64-2.7/3dinterpmodule.c:537:38: warning: assignment from incompatible pointer type [enabled by default]
+   f2py_global_var_def[i_f2py++].func = phi_pt;
+                                      ^
+/tmp/tmpr8O7jA/src.linux-x86_64-2.7/3dinterpmodule.c:547:38: warning: assignment from incompatible pointer type [enabled by default]
+   f2py_global_var_def[i_f2py++].func = flag_part_g;
+                                      ^
+/tmp/tmpr8O7jA/src.linux-x86_64-2.7/3dinterpmodule.c:548:38: warning: assignment from incompatible pointer type [enabled by default]
+   f2py_global_var_def[i_f2py++].func = theta_pt;
+                                      ^
+/tmp/tmpr8O7jA/src.linux-x86_64-2.7/3dinterpmodule.c: In function ‘init3dinterp’:
+/tmp/tmpr8O7jA/src.linux-x86_64-2.7/3dinterpmodule.c:608:7: error: invalid suffix "dinterp_module" on integer constant
+   m = 3dinterp_module = Py_InitModule("3dinterp", f2py_module_methods);
+       ^
+/tmp/tmpr8O7jA/src.linux-x86_64-2.7/3dinterpmodule.c:626:3: error: invalid suffix "dinterp_error" on integer constant
+   3dinterp_error = PyErr_NewException ("3dinterp.error", NULL, NULL);
+   ^
+/tmp/tmpr8O7jA/src.linux-x86_64-2.7/3dinterpmodule.c: At top level:
+/tmp/tmpr8O7jA/src.linux-x86_64-2.7/3dinterpmodule.c:111:12: warning: ‘f2py_size’ defined but not used [-Wunused-function]
+ static int f2py_size(PyArrayObject* var, ...)
+            ^
