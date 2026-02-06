@@ -3,7 +3,7 @@
 - install the python env provided in the yml file
 - the environment variable `$PATH_SRC_PYTHON_LOCAL` need to be defined and point where you have the dir `Process_MNH`
 ```
-mamba env create -f environment.yml
+mamba env create -f process_mnh.yml
 ```
 
 ## run the script

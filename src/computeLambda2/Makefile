@@ -20,6 +20,9 @@ endif
 ifeq  ($(HOST), andromeda)
 	F90FLAGS = -fPIC -fcray-pointer -fdefault-real-8 -fdefault-double-8  -O0 -g -fbounds-check -Wall -fbacktrace -fallow-invalid-boz
 endif
+ifeq  ($(HOST), andall)
+	F90FLAGS = -fPIC -fcray-pointer -fdefault-real-8 -fdefault-double-8  -O0 -g -fbounds-check -Wall -fbacktrace -fallow-invalid-boz
+endif
 
 #=======================================================================
 #                     additional flags

@@ -24,7 +24,8 @@ import itertools
 from functools import reduce
 import datetime
 
-path_processMNH = os.environ['PATH_SRC_PYTHON_LOCAL']+'/Process_MNH/src/'
+path_processMNH = os.environ['PATH_SRC_PYTHON_LOCAL']+'/process_MNH/src/'
+
 sys.path.append(path_processMNH)
 
 #homebrewed
