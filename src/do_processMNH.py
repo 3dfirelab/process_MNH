@@ -18,12 +18,14 @@ import f90nml
 import shutil 
 import importlib 
 import datetime
+import xarray as xr 
+
 
 if 'PATH_SRC_PYTHON_LOCAL' not in os.environ: 
     print('script need to be call from where is is the python script as PATH_SRC_PYTHON_LOCAL is not set in env variable')
     os.environ['PATH_SRC_PYTHON_LOCAL'] = '../../'
 
-path_processMNH = os.environ['PATH_SRC_PYTHON_LOCAL']+'/Process_MNH/src/'
+path_processMNH = os.environ['PATH_SRC_PYTHON_LOCAL']+'/process_MNH/src/'
 sys.path.append(path_processMNH)
 sys.path.append(path_processMNH+'writePlt/')
 #sys.path.append(path_processMNH+'../../Compare_FDS_MNH/src/')
@@ -238,11 +240,15 @@ if __name__ == '__main__':
 
     #remove init simulation files
     mesonh_filenames_ = []
+    mesonh_filenames_time = []
     for mesonh_filename in mesonh_filenames:
         if '.spa' in mesonh_filename: continue 
         if int(os.path.basename(mesonh_filename).split('.')[-2]) == 0: continue
         mesonh_filenames_.append(mesonh_filename)
-    mesonh_filenames = mesonh_filenames_
+        ds = xr.open_dataset(mesonh_filename)
+        mesonh_filenames_time.append( ds["time"].values[0]  )
+    
+    mesonh_filenames = np.array(mesonh_filenames_)[ np.argsort(mesonh_filenames_time)]
 
 
     #loop over the files
