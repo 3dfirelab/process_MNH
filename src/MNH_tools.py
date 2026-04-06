@@ -157,9 +157,9 @@ def read_mesoNH(filename,extraVar=None, dirDiag='../08_diag/'):
     rice_raw      = ncrice[0,:,:,:].T
 
 
-    nx= theta_raw.shape[0]-2
-    ny= theta_raw.shape[1]-2
-    nz= theta_raw.shape[2]-2
+    nx= ncx.shape[0]-2
+    ny= ncy.shape[0]-2
+    nz= ncz.shape[0]-2
    
     #edge
     xe = x_hat[1:] 
@@ -185,29 +185,58 @@ def read_mesoNH(filename,extraVar=None, dirDiag='../08_diag/'):
     #print('extar var:')
     #print(extraVar.name) 
     #print('')
-    out = np.zeros([nx+1,ny+1,nz+1],dtype=np.dtype(dtype_here))   
-    out = out.view(np.recarray)
+    #out = np.zeros([nx+1,ny+1,nz+1],dtype=np.dtype(dtype_here))   
+    #out = out.view(np.recarray)
+    try:
+        out = np.empty((nx+1, ny+1, nz+1), dtype=np.dtype(dtype_here))
+        for name in out.dtype.names:       
+            out[name].fill(np.nan)
+        out = out.view(np.recarray)
+            
+    except: 
+        pdb.set_trace()
+
     out.ye, out.xe, out.zb = np.meshgrid(ye,xe,z_hat[1:]) # use fake vertical grid here 
     out.zb = zb[1:,1:,1:]                                 # just to fill the horizontal grid
     out.yc, out.xc, out.zc = np.meshgrid(yc,xc,z_hat[1:]) # use fake vertical grid here 
     out.zc = zc                                           # just to fill the horizontal grid
+    
+    if theta_raw.shape[0] == ncx.shape[0]:
+        out.theta = theta_raw[1:,1:,1:]
+        out.tke = tke_raw[1:,1:,1:]
+        out.temp = theta_raw[1:,1:,1:] * (old_div(p_raw[1:,1:,1:],pressure_ref))**(kappa)  
+        out.u = u_raw[1:,1:,1:]
+        out.v = v_raw[1:,1:,1:]
+        out.w = w_raw[1:,1:,1:]
+        out.rvap    = rvap_raw[1:,1:,1:]
+        out.rcloud = rcloud_raw[1:,1:,1:]
+        out.rrain   = rrain_raw[1:,1:,1:]
+        out.rice    = rice_raw[1:,1:,1:]
+ 
+        rhodref = np.zeros_like(thw_raw)
+        for i,j in list(itertools.product(list(range(rhodref.shape[0])),list(range(rhodref.shape[1])))):
+            rhodref[i,j,:] = rhodrefz[:]
+    
+        out.rhod = old_div(p_raw[1:,1:,1:], (R * out.temp))
+    else: 
+        out.theta[:-1,:-1,:-1] = theta_raw[0:,0:,0:]
+        out.tke[:-1,:-1,:-1] = tke_raw[0:,0:,0:]
+        out.temp[:-1,:-1,:-1] = theta_raw[0:,0:,0:] * (old_div(p_raw[0:,0:,0:],pressure_ref))**(kappa)  
+        out.u[:,:-1,:-1] = u_raw[0:,0:,0:]
+        out.v[:-1,:,:-1] = v_raw[0:,0:,0:]
+        out.w[:-1,:-1,:] = w_raw[0:,0:,0:]
+        out.rvap[:-1,:-1,:-1]    = rvap_raw[0:,0:,0:]
+        out.rcloud[:-1,:-1,:-1] = rcloud_raw[0:,0:,0:]
+        out.rrain[:-1,:-1,:-1]   = rrain_raw[0:,0:,0:]
+        out.rice[:-1,:-1,:-1]    = rice_raw[0:,0:,0:]
+    
+        rhodref = np.zeros_like(thw_raw)
+        for i,j in list(itertools.product(list(range(rhodref.shape[0])),list(range(rhodref.shape[1])))):
+            rhodref[i,j,:] = rhodrefz[1:-1]
 
-    out.theta = theta_raw[1:,1:,1:]
-    out.tke = tke_raw[1:,1:,1:]
-    out.temp = theta_raw[1:,1:,1:] * (old_div(p_raw[1:,1:,1:],pressure_ref))**(kappa)  
-    out.u = u_raw[1:,1:,1:]
-    out.v = v_raw[1:,1:,1:]
-    out.w = w_raw[1:,1:,1:]
-    out.rvap    = rvap_raw[1:,1:,1:]
-    out.rclound = rcloud_raw[1:,1:,1:]
-    out.rrain   = rrain_raw[1:,1:,1:]
-    out.rice    = rice_raw[1:,1:,1:]
-  
-    rhodref = np.zeros_like(thw_raw)
-    for i,j in list(itertools.product(list(range(rhodref.shape[0])),list(range(rhodref.shape[1])))):
-        rhodref[i,j,:] = rhodrefz[:]
+        
+        out.rhod[:-1,:-1,:-1] = old_div(p_raw[:,:,:], (R * out.temp[1:,1:,1:]))
 
-    out.rhod = old_div(p_raw[1:,1:,1:], (R * out.temp))
 
     extraVar2D = [] #var to find in diag
     if extraVar is not None: 
@@ -244,11 +273,22 @@ def read_mesoNH(filename,extraVar=None, dirDiag='../08_diag/'):
                     else:
                         pdb.set_trace()
 
-    ground = np.zeros([nx+1,ny+1],dtype=np.dtype([('xc',float),('yc',float),('heatFlux',float),('orography',float)]))   
+    #ground = np.zeros([nx+1,ny+1],dtype=np.dtype([('xc',float),('yc',float),('heatFlux',float),('orography',float)]))   
+    ground = np.empty(
+                (nx+1, ny+1),
+                dtype=[('xc', float), ('yc', float), ('heatFlux', float), ('orography', float)]
+            )
+    for name in ground.dtype.names:
+        ground[name].fill(np.nan)
     ground = ground.view(np.recarray)
+
     ground.yc, ground.xc = np.meshgrid(yc,xc)
     ground.orography = zs[1:,1:]
-    ground.heatFlux = XCPD * rhodref[1:,1:,1] * thw_raw[1:,1:,1] * 1.e-3 # kW/m2
+    
+    if theta_raw.shape[0] == ncx.shape[0]:
+        ground.heatFlux = XCPD * rhodref[1:,1:,1] * thw_raw[1:,1:,1] * 1.e-3 # kW/m2
+    else:
+        ground.heatFlux[:-1,:-1] = XCPD * rhodref[0:,0:,1] * thw_raw[0:,0:,1] * 1.e-3 # kW/m2
 
 
     if len(extraVar2D)>0: #load variable from 08_diag
@@ -337,7 +377,15 @@ def interp_mesonh(MesoNH, ground, ff_sv=None, dxyz_factor=1, verbose=0, indent='
             except: 
                 dtype_here.append((name,dtype))
 
-    out = np.zeros([nx,ny,nz],dtype=np.dtype(dtype_here))   
+    #out = np.zeros([nx,ny,nz],dtype=np.dtype(dtype_here))   
+    try: 
+        out = np.empty((nx, ny, nz), dtype=np.dtype(dtype_here))
+        for name in out.dtype.names:
+            out[name].fill(np.nan)
+        out = out.view(np.recarray)
+    
+    except: 
+        pdb.set_trace()
     out = out.view(np.recarray)
     out.yc, out.xc, out.zc = yc, xc, zc
     if verbose > 0: print(2*indent, '3D output field is ', xc.shape)
