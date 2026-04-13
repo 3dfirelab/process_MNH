@@ -23,6 +23,7 @@ import socket
 import itertools
 from functools import reduce
 import datetime
+from scipy import ndimage
 
 path_processMNH = os.environ['PATH_SRC_PYTHON_LOCAL']+'/process_MNH/src/'
 
@@ -46,6 +47,23 @@ def ensure_dir(f):
     d = os.path.dirname(f)
     if not os.path.exists(d):
         os.makedirs(d)
+
+
+#####################################################################
+def extrapolate_Nan(arr):
+
+    # Mask of NaNs
+    mask = np.isnan(arr)
+
+    # Get indices of nearest non-NaN values
+    idx = ndimage.distance_transform_edt(mask,
+                                         return_distances=False,
+                                         return_indices=True)
+
+    # Replace NaNs with nearest neighbor values
+    arr_filled = arr[tuple(idx)]
+
+    return arr_filled
 
 
 #####################################################################
@@ -243,7 +261,11 @@ def read_mesoNH(filename,extraVar=None, dirDiag='../08_diag/'):
         #deal with passive tracer
         for name_,name_mnh_ in zip(extraVar.name,extraVar.name_mnh):
             if name_mnh_ == 'lambda2':
-                postproc.lambda2.compute(out.shape[1], out.shape[2], out.shape[0], out.xc, out.yc, out.zc, out.u, out.v, out.w) 
+                
+                postproc.lambda2.compute(out.shape[1], out.shape[2], out.shape[0], out.xc, out.yc, out.zc, 
+                                         extrapolate_Nan(out.u), 
+                                         extrapolate_Nan(out.v), 
+                                         extrapolate_Nan(out.w)) 
                 out[name_]    = postproc.lambda2.values
                 postproc.lambda2.clear()
             elif name_mnh_ in ['HBLTOP', 'UM10', 'VM10', 'FF10MAX', 'T2M_ISBA']:

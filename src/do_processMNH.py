@@ -267,7 +267,7 @@ if __name__ == '__main__':
     i_mnh_file = 0
     time_scene_arr = []
     for ifile,  mesonh_filename in enumerate(mesonh_filenames):
-       
+      
         #load mesonh data
         #-----------------
         time_scene, datetime_MNHref, FireScene, FireScene2D, FireSceneMeshExtra = MNH_tools.load_centered_MesoNHField(mesonh_filename,      \
